@@ -6,8 +6,14 @@
     color: var(--subtle);
 }
 
-.show-answer {
-    display: inline;
+#question .btn {
+    margin-left: 0.5rem;
+}
+@media (max-width: 576px) {
+    #question .btn {
+        margin-top: 0.5rem;
+        margin-left: 0;
+    }
 }
 
 .help_text {

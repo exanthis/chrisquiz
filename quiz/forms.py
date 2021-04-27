@@ -1,5 +1,5 @@
 from django import forms
-from .models import Category
+from .models import Category, Question
 
 
 class QuestionFilterForm(forms.Form):
@@ -16,3 +16,12 @@ class QuestionFilterForm(forms.Form):
         # UI elements
         self.fields['number_of_questions'].widget.attrs.update({'class': 'form-control form-control-sm' })
         self.fields['categories'].widget.attrs.update({'class': 'form-control form-control-sm' })
+
+class QuestionForm(forms.ModelForm):
+
+    class Meta:
+        model = Question
+        fields = '__all__'
+        widgets = {
+            'category': forms.RadioSelect(),
+        }

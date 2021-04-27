@@ -31,14 +31,18 @@ gfd
     </div>
 </div>
 <div class="container">
-    <h1>Questions</h1>
+    <h1>Questions</h1>            
+    <button type="button" data-id="show-all-answers" id="show-all-answers" class="ml-1 btn btn-primary btn-sm">Show ALL answers</button>
     {% for question in questions %}
-    <div class="row question">
+    <div class="row question" id="question">
         <div class="col-12">
             <small class="sub-text">{{question.category}}</small>
             <h4>{{question.question}}</h4>
-            <input type="text">
-            <button type="button" data-id="show-answer-{{question.id}}" id="{{question.id}}" class="btn btn-primary btn-sm show-answer">Show answer</button>
+            <div class="form-inline">
+                <textarea rows="1" cols="40" class="form-control form-control-sm"></textarea>
+                <button type="button" data-id="show-answer-{{question.id}}" id="{{question.id}}" class="btn btn-primary btn-sm show-answer form-control form-control-sm">Show answer</button>
+                <button type="button" data-id="ignore-question-{{question.id}}" id="ignore-question-{{question.id}}" class="btn btn-warning btn-sm ignore-question form-control form-control-sm">Ignore for 7 days</button>
+            </div>
             <p class="answer" style="display:none;" data-id="answer-{{question.id}}" id="answer-{{question.id}}">{{question.answer}}</p>
         </div>
     </div>

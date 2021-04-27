@@ -18,6 +18,10 @@ class Question(models.Model):
         blank=False,
         help_text="Answer to the question"
     )
+    ignore_until = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
         return f' ({self.category.name}): {self.question}'
