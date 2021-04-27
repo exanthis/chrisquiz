@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}
+gfd
+{% endblock %}
+
+{% block body %}
+{# FORM #}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form class="my-4" method="GET">
+                <div class="row d-flex align-items-end">
+                    <div class="col-6 col-lg">
+                        {{ filter_form.number_of_questions.errors }}
+                        <label for="{{form.number_of_questions.id_for_label}}">{{filter_form.number_of_questions.label }}</label>
+                        {{ filter_form.number_of_questions }}
+                    </div>
+                    <div class="col-6 col-lg">
+                        {{ filter_form.categories.errors }}
+                        <label for="{{form.categories.id_for_label}}">{{filter_form.categories.label }}<p class="help_text">{{ filter_form.categories.help_text }}</p></label>
+                        {{ filter_form.categories }}
+                        
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+                    </div>
+                </div>
+              </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1>Questions</h1>
+    {% for question in questions %}
+    <div class="row question">
+        <div class="col-12">
+            <small class="sub-text">{{question.category}}</small>
+            <h4>{{question.question}}</h4>
+            <input type="text">
+            <button type="button" data-id="show-answer-{{question.id}}" id="{{question.id}}" class="btn btn-primary btn-sm show-answer">Show answer</button>
+            <p class="answer" style="display:none;" data-id="answer-{{question.id}}" id="answer-{{question.id}}">{{question.answer}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
+
+{% block style %}
+<script src="{% static 'quiz/quiz.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,20 @@
+:root {
+    --subtle: rgba(0,0,0,0.6);
+}
+
+.sub-text {
+    color: var(--subtle);
+}
+
+.show-answer {
+    display: inline;
+}
+
+.help_text {
+    color: var(--subtle);
+    font-size: 85%;
+}
+
+.question {
+    margin-bottom: 1.5rem;
+}
