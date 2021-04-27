@@ -41,7 +41,8 @@ gfd
             <div class="form-inline">
                 <textarea rows="1" cols="40" class="form-control form-control-sm"></textarea>
                 <button type="button" data-id="show-answer-{{question.id}}" id="{{question.id}}" class="btn btn-primary btn-sm show-answer form-control form-control-sm">Show answer</button>
-                <button type="button" data-id="ignore-question-{{question.id}}" id="ignore-question-{{question.id}}" class="btn btn-warning btn-sm ignore-question form-control form-control-sm">Ignore for 7 days</button>
+                <button type="button" data-id="ignore-question-{{question.id}}" data-ignore-for="7" class="btn btn-warning btn-sm ignore-question form-control form-control-sm">Ignore for 7 days</button>
+                <button type="button" data-id="ignore-question-{{question.id}}" data-ignore-for="14" class="btn btn-warning btn-sm ignore-question form-control form-control-sm">Ignore for 14 days</button>
             </div>
             <p class="answer" style="display:none;" data-id="answer-{{question.id}}" id="answer-{{question.id}}">{{question.answer}}</p>
         </div>
