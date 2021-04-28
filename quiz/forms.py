@@ -9,7 +9,7 @@ class QuestionFilterForm(forms.Form):
         CATEGORY_CHOICES.append((category.id, category.name,))
 
     number_of_questions = forms.IntegerField(label="Number of questions", required=True, initial=10)
-    categories = forms.MultipleChoiceField(choices=CATEGORY_CHOICES, required=False, help_text="You can leave this blank")
+    categories = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), to_field_name="id", required=False, help_text="You can leave this blank")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

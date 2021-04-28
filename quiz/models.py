@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Question(models.Model):
@@ -25,6 +26,12 @@ class Question(models.Model):
 
     def __str__(self):
         return f' ({self.category.name}): {self.question}'
+    
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.ignore_until = timezone.now()
+        super().save(*args, **kwargs)
+
 
 class Category(models.Model):
     name = models.CharField(
@@ -38,4 +45,5 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def __str__(self):
-        return f'Category: {self.name}'
+        return f'{self.name}'
+
