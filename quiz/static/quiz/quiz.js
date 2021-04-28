@@ -9,16 +9,24 @@ document.addEventListener('DOMContentLoaded', function() {
         handleShowAllAnswers()
     })
     document.querySelectorAll('.ignore-question').forEach(element => {
-        element.addEventListener('click', function() {
-            handleIgnoreQuestion()
-        })
+        element.addEventListener('click', handleIgnoreQuestion)
+    })
+    document.querySelectorAll('.hide-question').forEach(element => {
+        element.addEventListener('click', handleHideQuestion)
     })
 })
 
+function handleHideQuestion() {
+    questionId = event.target.dataset.id.split('-')[2]
+    document.getElementById('question-' + questionId).style.display = 'none'
+}
+
 function handleIgnoreQuestion() {
-    days = event.target.dataset.ignoreFor
-    dataId = event.target.dataset.id.split('-')
-    questionId = dataId[dataId.length - 1]
+    console.log('inHandleIgnore')
+    var button = event.target
+    var days = event.target.dataset.ignoreFor
+    var dataId = event.target.dataset.id.split('-')
+    var questionId = dataId[dataId.length - 1]
     fetch(`/api/v1/ignore/${questionId}?days=${days}`, {
         method: 'PATCH',
         credentials: 'same-origin',
@@ -31,11 +39,25 @@ function handleIgnoreQuestion() {
         return response.json()
     })
     .then(function(data) {
-        console.log(data)
+        var untilDate = new Date(`${data['ignore_until']}`).toLocaleDateString()
+        console.log(button)
+        button.classList.remove('btn-warning')
+        button.classList.add('btn-success')
+        button.innerHTML = `Ignored until ${untilDate}; click to hide question`
+        button.removeEventListener('click', handleIgnoreQuestion)
+        button.addEventListener('click', handleDismissQuestion)
     })
 }
 
+function handleDismissQuestion() {
+    button = event.target
+    ignoreQuestionX = button.dataset.id.split('-')
+    questionId = ignoreQuestionX[1] + '-' + ignoreQuestionX[2]
+    document.getElementById(questionId).style.display = 'none'
+}
+
 function handleShowAnswer() {
+    console.log('inhandleshowancser')
     answer = document.getElementById(`answer-${event.target.id}`)
     if (answer.style.display === 'block') {
         answer.style.display = 'none'

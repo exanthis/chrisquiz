@@ -6,11 +6,11 @@
     color: var(--subtle);
 }
 
-#question .btn {
+.question .btn {
     margin-left: 0.5rem;
 }
 @media (max-width: 576px) {
-    #question .btn {
+    .question .btn {
         margin-top: 0.5rem;
         margin-left: 0;
     }
@@ -23,4 +23,8 @@
 
 .question {
     margin-bottom: 1.5rem;
+}
+
+.answer {
+    margin-top: 0.7rem;
 }

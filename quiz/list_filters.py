@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
-class QuestionListFilter(admin.SimpleListFilter):
+class QuestionIgnoredListFilter(admin.SimpleListFilter):
     """
     A filter for the Category admin page that filters by whether 
     a category has methods
@@ -41,3 +41,5 @@ class QuestionListFilter(admin.SimpleListFilter):
             queryset = queryset.exclude(ignore_until__gt=timezone.now())
             
             return queryset
+
+
