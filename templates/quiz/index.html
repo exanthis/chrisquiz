@@ -39,8 +39,10 @@ gfd
 
 
 <div class="container">
-    <h1>Questions</h1>            
+    <h1>Questions</h1>
+    {% if questions %}            
     <button type="button" data-id="show-all-answers" id="show-all-answers" class="ml-1 btn btn-primary btn-sm">Show ALL answers</button>
+    {% endif %}
     {% for question in questions %}
     <div class="row question" id="question-{{question.id}}">
         <div class="col-12">
@@ -52,7 +54,7 @@ gfd
                 <button type="button" title="Ignore question for seven days" data-id="ignore-question-{{question.id}}" data-ignore-for="7" class="btn btn-warning btn-sm ignore-question form-control form-control-sm mt-2 ">7 days</button>
                 <button type="button" title="Ignore question for 14 days" data-id="ignore-question-{{question.id}}" data-ignore-for="14" class="btn btn-warning btn-sm ignore-question form-control form-control-sm mt-2">14 days</button>
                 <button type="button" title="Minimise question" data-id="hide-question-{{question.id}}" class="btn btn-info btn-sm form-control form-control-sm hide-question mt-2">-</button>
-                <button type="button" title="Hide question indefinitely" data-id="hide-question-{{question.id}}" data-ignore-for="indefinitely" class="btn btn-danger btn-sm form-control form-control-sm ignore-question mt-2">X</button>
+                <!--<button type="button" title="Hide question indefinitely" data-id="hide-question-{{question.id}}" data-ignore-for="indefinitely" class="btn btn-danger btn-sm form-control form-control-sm ignore-question mt-2">X</button>-->
             </div>
             <div class="answer" style="display:none;" data-id="answer-{{question.id}}" id="answer-{{question.id}}">{{question.answer|safe}}</div>
         </div>

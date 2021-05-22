@@ -24,7 +24,8 @@ def index(request):
 
     else:
         form = QuestionFilterForm1()
-        questions = Question.objects.exclude(ignore_until__gte=timezone.now()).filter(hide_indefinitely=False).order_by('?')[:10].select_related('category')
+        # questions = Question.objects.exclude(ignore_until__gte=timezone.now()).filter(hide_indefinitely=False).order_by('?')[:10].select_related('category')
+        questions = Question.objects.none()
     context = {
         "questions":questions,
         "form": form,
