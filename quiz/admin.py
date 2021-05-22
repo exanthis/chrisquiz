@@ -6,7 +6,7 @@ from .forms import QuestionForm
 from .list_filters import QuestionIgnoredListFilter
 
 
-@admin.action(description="Remove 'ignore' and on selected questions")
+@admin.action(description="Remove 'ignore' on selected questions")
 def unignore(modeladmin, request, queryset):
     queryset.update(ignore_until=timezone.now())
 
