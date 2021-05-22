@@ -16,4 +16,4 @@ This project is designed to be run as a local website. For that reason, certain 
 
 # Pulling in new changes
 - `git pull origin main` pulls in the latest changes.
-- If the changes include changes to the database, you must run `python manage.py migrate` to migrate those changes to the database.
+- If the changes include changes to the database design, you must run `python manage.py migrate` to migrate those changes to your database.
