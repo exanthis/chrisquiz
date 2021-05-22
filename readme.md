@@ -5,7 +5,7 @@ This project is designed to be run as a local website. For that reason, certain 
 
 # Running the server
 ## Quick
-`source env/bin/activate;python3 manage.py runserver`
+`source env/bin/activate; python3 manage.py runserver`
 ## Verbose
 - Navigate to /chrisquiz
 - Activate the virtual environment with `source env/bin/activate`
