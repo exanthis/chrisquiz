@@ -4,6 +4,9 @@ See `requirements.txt` for the rest.
 This project is designed to be run as a local website. For that reason, certain steps have been made to make it easier to set up and use, but those steps make the site insecure. Don't host it anywhere public.
 
 # Running the server
+## Quick
+`source env/bin/activate;python3 manage.py runserver`
+## Verbose
 - Navigate to /chrisquiz
 - Activate the virtual environment with `source env/bin/activate`
 - Start the server with `python3 manage.py runserver`
