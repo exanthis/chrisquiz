@@ -9,77 +9,33 @@ gfd
 <div class="container">
     <div class="row">
         <div class="col-12">
-<form>
-    <div class="row d-flex align-items-end">
-        <div class="col-6 col-lg">
-            {{ form.number_of_questions.errors }}
-            <label for="{{form.number_of_questions.id_for_label}}">{{form.number_of_questions.label }}</label>
-            {{ form.number_of_questions }}
-        </div>
-        <div class="col-6 col-lg">
-            {% for category in form.categories %}
-            <div class="form-check form-check-inline">
-            {{ category.errors }}
-            <label class="form-check-label" for="{{category.id_for_label}}">{{ category.label }}<p class="help_text">{{ category.help_text }}</p></label>
-                {{category}}
-            </div>
-            {% endfor %}
-            
-        </div>
-        <div class="col">
-            <button type="submit" class="btn btn-primary btn-sm">Filter</button>
-        </div>
-</form>
-</div></div></div>
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <form class="my-4" method="GET">
+            <form>
                 <div class="row d-flex align-items-end">
                     <div class="col-6 col-lg">
-                        {{ filter_form.number_of_questions.errors }}
-                        <label for="{{form.number_of_questions.id_for_label}}">{{filter_form.number_of_questions.label }}</label>
-                        {{ filter_form.number_of_questions }}
+                        {{ form.number_of_questions.errors }}
+                        <label for="{{form.number_of_questions.id_for_label}}">{{form.number_of_questions.label }}</label>
+                        {{ form.number_of_questions }}
                     </div>
                     <div class="col-6 col-lg">
-                        {{ filter_form.categories.errors }}
-                        <label for="{{form.categories.id_for_label}}">{{filter_form.categories.label }}<p class="help_text">{{ filter_form.categories.help_text }}</p></label>
-                        {{ filter_form.categories }}
+                        {% for category in form.categories %}
+                        <div class="form-check form-check-inline">
+                        {{ category.errors }}
+                        <label class="form-check-label" for="{{category.id_for_label}}">{{ category.label }}<p class="help_text">{{ category.help_text }}</p></label>
+                            {{category}}
+                        </div>
+                        {% endfor %}
                         
                     </div>
                     <div class="col">
                         <button type="submit" class="btn btn-primary btn-sm">Filter</button>
                     </div>
-                </div>
-              </form>
+            </form>
         </div>
     </div>
 </div>
 
-<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
 
-{{ filter_form.media }}
 
-<script>
-(function($) {
-    $('#add-form').click(function() {
-        var index = $('#id_inline_test_models-TOTAL_FORMS').val()
-        var newTable = $('#id_inline_test_models-__prefix__-DELETE').parents('table').clone()
-        newTable.find(':input').each(function() {
-            for (attr of ['name', 'id'])
-                $(this).attr(
-                    attr,
-                    $(this).attr(attr).replace('__prefix__', index)
-                )
-        })
-        newTable.insertBefore($(this))
-        $('#id_inline_test_models-TOTAL_FORMS').val(
-            parseInt($('#id_inline_test_models-TOTAL_FORMS').val()) + 1
-        )
-        newTable.slideDown()
-    })
-})($)
-</script>
 
 
 <div class="container">
