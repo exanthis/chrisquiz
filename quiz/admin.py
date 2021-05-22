@@ -26,6 +26,7 @@ class QuestionAdmin(admin.ModelAdmin):
     form = QuestionForm
     list_filter = ('category', QuestionIgnoredListFilter)
     actions = (unignore, unhide, unignorehide, ignore_for_seven_days)
+    list_per_page=1000
 
 # Register your models here.
 admin.site.register(Question, QuestionAdmin)
