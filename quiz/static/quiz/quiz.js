@@ -24,9 +24,13 @@ function handleHideQuestion() {
 function handleIgnoreQuestion() {
     console.log('inHandleIgnore')
     var button = event.target
-    var days = event.target.dataset.ignoreFor
+    // var days = event.target.dataset.ignoreFor
+    // get question id (pk)
     var dataId = event.target.dataset.id.split('-')
     var questionId = dataId[dataId.length - 1]
+    console.log(questionId)
+    var days = document.querySelector(`#input-ignore-${questionId}`).value
+    console.log(days)
     fetch(`/api/v1/ignore/${questionId}?days=${days}`, {
         method: 'PATCH',
         credentials: 'same-origin',
