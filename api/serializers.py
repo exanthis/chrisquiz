@@ -10,12 +10,15 @@ class QuestionSerializer(serializers.ModelSerializer):
         fields = ('ignore_until',)
 
     def update(self, instance, validated_data):
-        print('hello')
         if self.context['request'].query_params.get('days'):
             print('in queryparamsif')
-            days = int(self.context['request'].query_params['days'])
-            until = timezone.now() + timedelta(days=days)
-            instance.ignore_until = until
+            if self.context['request'].query_params.get('days') == 'indefinitely':
+                instance.hide_indefinitely = True
+            else:
+                days = int(self.context['request'].query_params['days'])
+                until = timezone.now() + timedelta(days=days)
+                print(f"ignoring until {until}")
+                instance.ignore_until = until
             instance.save()
             return instance
         else:

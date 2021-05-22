@@ -43,7 +43,11 @@ function handleIgnoreQuestion() {
         console.log(button)
         button.classList.remove('btn-warning')
         button.classList.add('btn-success')
-        button.innerHTML = `Ignored until ${untilDate}; click to hide question`
+        if (days === "indefinitely") {
+            button.innerHTML = `Ignored indefinitely. Click to hide question. You must visit the admin to unhide this question.`
+        } else {
+            button.innerHTML = `Ignored until ${untilDate}; click to hide question`
+        }
         button.removeEventListener('click', handleIgnoreQuestion)
         button.addEventListener('click', handleDismissQuestion)
     })

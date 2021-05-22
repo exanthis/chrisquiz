@@ -6,9 +6,17 @@ from .forms import QuestionForm
 from .list_filters import QuestionIgnoredListFilter
 
 
-@admin.action(description="Remove 'ignore' on selected questions")
+@admin.action(description="Remove 'ignore' and on selected questions")
 def unignore(modeladmin, request, queryset):
     queryset.update(ignore_until=timezone.now())
+
+@admin.action(description="Remove 'hide' on selected questions")
+def unhide(modeladmin, request, queryset):
+    queryset.update(hide_indefinitely=False)
+
+@admin.action(description="Remove 'ignore' and 'hide' on selected questions")
+def unignorehide(modeladmin, request, queryset):
+    queryset.update(ignore_until=timezone.now(), hide_indefinitely=False)
 
 @admin.action(description="Ignore selected questions for 7 days")
 def ignore_for_seven_days(modeladmin, request, queryset):
@@ -16,8 +24,8 @@ def ignore_for_seven_days(modeladmin, request, queryset):
 
 class QuestionAdmin(admin.ModelAdmin):
     form = QuestionForm
-    list_filter = ('category', QuestionIgnoredListFilter,)
-    actions = (unignore, ignore_for_seven_days)
+    list_filter = ('category', QuestionIgnoredListFilter)
+    actions = (unignore, unhide, unignorehide, ignore_for_seven_days)
 
 # Register your models here.
 admin.site.register(Question, QuestionAdmin)

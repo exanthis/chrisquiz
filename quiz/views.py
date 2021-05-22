@@ -1,9 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.db.models import Q
 from django.utils import timezone
 from .models import Question, Category
-from .forms import QuestionFilterForm
+from .forms import QuestionFilterForm, QuestionFilterForm1
+
 
 # Create your views here.
 def index(request):
@@ -19,15 +18,16 @@ def index(request):
             categories_in_db = Category.objects.filter(id__in=categories_requested_by_id)
             # Get questions whose categories fall in those selected, randomise,
             # and get only the number of qs specified in the form
-            questions = Question.objects.filter(category__in=categories_in_db).exclude(ignore_until__gte=timezone.now()).order_by('?')[:number_of_questions_requested]
+            questions = Question.objects.filter(category__in=categories_in_db, hide_indefinitely=False).exclude(ignore_until__gte=timezone.now()).order_by('?')[:number_of_questions_requested]
         else: # User just wants a specified number of questions, doesn't care about category
-            questions = Question.objects.exclude(ignore_until__gte=timezone.now()).order_by('?')[:number_of_questions_requested]
+            questions = Question.objects.exclude(ignore_until__gte=timezone.now()).filter(hide_indefinitely=False).order_by('?')[:number_of_questions_requested]
 
     else:
         filter_form = QuestionFilterForm()
-        questions = Question.objects.exclude(ignore_until__gte=timezone.now()).order_by('?')[:10].select_related('category')
+        questions = Question.objects.exclude(ignore_until__gte=timezone.now()).filter(hide_indefinitely=False).order_by('?')[:10].select_related('category')
     context = {
         "questions":questions,
         "filter_form":filter_form,
+        "form": QuestionFilterForm1(),
     }
     return render(request, 'quiz/index.html', context)

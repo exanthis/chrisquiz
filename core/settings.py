@@ -41,11 +41,16 @@ INSTALLED_APPS = [
 
     # 3rd party
     'rest_framework',
+    'ckeditor',
+    'ckeditor_uploader',
 
     # local
     'quiz',
     'api',
 ]
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
 
 # new
 REST_FRAMEWORK = {
@@ -132,9 +137,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '../static/')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 X_FRAME_OPTIONS = "SAME_ORIGIN"
+

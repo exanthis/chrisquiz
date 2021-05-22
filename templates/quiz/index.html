@@ -9,6 +9,31 @@ gfd
 <div class="container">
     <div class="row">
         <div class="col-12">
+<form>
+    <div class="row d-flex align-items-end">
+        <div class="col-6 col-lg">
+            {{ form.number_of_questions.errors }}
+            <label for="{{form.number_of_questions.id_for_label}}">{{form.number_of_questions.label }}</label>
+            {{ form.number_of_questions }}
+        </div>
+        <div class="col-6 col-lg">
+            {% for category in form.categories %}
+            <div class="form-check form-check-inline">
+            {{ category.errors }}
+            <label class="form-check-label" for="{{category.id_for_label}}">{{ category.label }}<p class="help_text">{{ category.help_text }}</p></label>
+                {{category}}
+            </div>
+            {% endfor %}
+            
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+        </div>
+</form>
+</div></div></div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
             <form class="my-4" method="GET">
                 <div class="row d-flex align-items-end">
                     <div class="col-6 col-lg">
@@ -30,24 +55,55 @@ gfd
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+
+{{ filter_form.media }}
+
+<script>
+(function($) {
+    $('#add-form').click(function() {
+        var index = $('#id_inline_test_models-TOTAL_FORMS').val()
+        var newTable = $('#id_inline_test_models-__prefix__-DELETE').parents('table').clone()
+        newTable.find(':input').each(function() {
+            for (attr of ['name', 'id'])
+                $(this).attr(
+                    attr,
+                    $(this).attr(attr).replace('__prefix__', index)
+                )
+        })
+        newTable.insertBefore($(this))
+        $('#id_inline_test_models-TOTAL_FORMS').val(
+            parseInt($('#id_inline_test_models-TOTAL_FORMS').val()) + 1
+        )
+        newTable.slideDown()
+    })
+})($)
+</script>
+
+
 <div class="container">
     <h1>Questions</h1>            
     <button type="button" data-id="show-all-answers" id="show-all-answers" class="ml-1 btn btn-primary btn-sm">Show ALL answers</button>
     {% for question in questions %}
     <div class="row question" id="question-{{question.id}}">
         <div class="col-12">
-            <small class="sub-text">{{question.category}}</small>
-            <h4>{{question.question}}</h4>
+            <div><small class="sub-text">{{question.category}}</small></div>
+            <div>{{question.question|safe}}</div>
             <div class="form-inline">
                 <textarea rows="2" cols="60" class="form-control form-control-sm"></textarea>
-                <button type="button" data-id="show-answer-{{question.id}}" id="{{question.id}}" class="btn btn-primary btn-sm show-answer form-control form-control-sm">Show answer</button>
-                <button type="button" data-id="ignore-question-{{question.id}}" data-ignore-for="7" class="btn btn-warning btn-sm ignore-question form-control form-control-sm">Ignore for 7 days</button>
-                <button type="button" data-id="ignore-question-{{question.id}}" data-ignore-for="14" class="btn btn-warning btn-sm ignore-question form-control form-control-sm">Ignore for 14 days</button>
-                <button type="button" data-id="hide-question-{{question.id}}" class="btn btn-danger btn-sm form-control form-control-sm hide-question">X</button>
+                <button type="button" title="Show Answer" data-id="show-answer-{{question.id}}" id="{{question.id}}" class="btn btn-primary btn-sm show-answer form-control form-control-sm mt-2 ">Show answer</button>
+                <button type="button" title="Ignore question for seven days" data-id="ignore-question-{{question.id}}" data-ignore-for="7" class="btn btn-warning btn-sm ignore-question form-control form-control-sm mt-2 ">7 days</button>
+                <button type="button" title="Ignore question for 14 days" data-id="ignore-question-{{question.id}}" data-ignore-for="14" class="btn btn-warning btn-sm ignore-question form-control form-control-sm mt-2">14 days</button>
+                <button type="button" title="Minimise question" data-id="hide-question-{{question.id}}" class="btn btn-info btn-sm form-control form-control-sm hide-question mt-2">-</button>
+                <button type="button" title="Hide question indefinitely" data-id="hide-question-{{question.id}}" data-ignore-for="indefinitely" class="btn btn-danger btn-sm form-control form-control-sm ignore-question mt-2">X</button>
             </div>
-            <p class="answer" style="display:none;" data-id="answer-{{question.id}}" id="answer-{{question.id}}">{{question.answer}}</p>
+            <div class="answer" style="display:none;" data-id="answer-{{question.id}}" id="answer-{{question.id}}">{{question.answer|safe}}</div>
         </div>
     </div>
+    {% if not forloop.last %}
+    <hr style="border-top: 2px solid black;">
+    {% endif %}
     {% endfor %}
 </div>
 

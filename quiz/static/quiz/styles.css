@@ -19,6 +19,7 @@
 .help_text {
     color: var(--subtle);
     font-size: 85%;
+    margin-bottom: 2px;
 }
 
 .question {
